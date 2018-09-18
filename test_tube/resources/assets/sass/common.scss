@@ -19,11 +19,33 @@ body {
 .logo {
     padding-top: 25px;
 }
-
-.comment-input {
-    border: none;
-    border-bottom: 1px solid #777;
+.leave-comment {
+    margin: 25px 0;
+    &-input {
+        width: 50%;
+        border: none;
+        border-bottom: 1px solid #777;
+    }
 }
+
+.single-comment {
+    margin: 15px 0;
+    &__username {
+        width: 20%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        span{
+            &:first-child {
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+
+
 
 .not_found {
     text-align: center;

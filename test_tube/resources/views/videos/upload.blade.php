@@ -5,7 +5,7 @@
         <div class="col-md-8">
 
             <h1> Upload Video </h1>
-            <form method="POST" enctype="multipart/form-data" action="{{ action('VideoController@store') }}">
+            <form method="POST" enctype="multipart/form-data" action="/upload">
                 {{csrf_field()}}
 
                 <div class="form-group">

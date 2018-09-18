@@ -34,14 +34,14 @@ class VideoController extends Controller
 
         $video = $request->file('video_filename');
 
-       /*  $link = public_path(
-            'videos/' . uniqid(\Auth::user()->id . '_') . '.mp4'
-        );
+         /* $link = public_path(
+            'videos/'
+        ) . uniqid(\Auth::user()->id . '_') . '.mp4';
 
        
 
         $video->move($link);
-        $video_filename =  url(explode('public' . DIRECTORY_SEPARATOR , $link)[1]) ; */
+        $video_filename =  url(explode('public' . DIRECTORY_SEPARATOR , $link)[1]) ;  */
 
         $video_filename = uniqid() . '.mp4';
         $video-> move(public_path() . '/videos' , $video_filename);

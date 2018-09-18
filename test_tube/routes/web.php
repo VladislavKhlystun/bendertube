@@ -23,6 +23,8 @@ Route::post('/upload', 'VideoController@store');
 
 Route::get('/videos/{video}', 'VideoController@singleVideo');
 
+Route::post('/videos/{video}/comments', 'CommentController@store');
+
 
 Auth::routes();
 

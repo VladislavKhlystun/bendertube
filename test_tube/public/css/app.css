@@ -10482,11 +10482,6 @@ a.text-dark:focus {
       flex-wrap: wrap;
 }
 
-.videos-block .not_found {
-  width: 50%;
-  margin: 0 auto;
-}
-
 .registration-form {
   margin-top: 25px;
 }
@@ -10538,9 +10533,37 @@ body {
   padding-top: 25px;
 }
 
-.comment-input {
+.leave-comment {
+  margin: 25px 0;
+}
+
+.leave-comment-input {
+  width: 50%;
   border: none;
   border-bottom: 1px solid #777;
+}
+
+.single-comment {
+  margin: 15px 0;
+}
+
+.single-comment__username {
+  width: 20%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.single-comment__username span:first-child {
+  font-weight: bold;
 }
 
 .not_found {
