@@ -1,0 +1,9 @@
+.videos-block {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .not_found {
+        width: 50%; margin: 0 auto; 
+    }
+}
+
