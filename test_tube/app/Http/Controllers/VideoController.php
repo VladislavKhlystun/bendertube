@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Video;
 use App\User;
+use App\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -11,8 +12,7 @@ use Illuminate\Http\Request;
 class VideoController extends Controller
 {
     public function index() {
-        $videos = Video::all();
-    	return view('videos.index', compact('videos'));
+    	return view('videos.index');
     }
 
     public function showUploadPage() {
@@ -20,16 +20,14 @@ class VideoController extends Controller
     }
 
     public function singleVideo(Video $video) {
-        $user = Auth::user();
-        return view('videos.singleVideo', compact(['video', 'user']));
+        return view('videos.singleVideo', compact('video'));
     }
 
     public function store(Request $request) {
-
-
         $this->validate($request, [
             'title' => 'required|max:255',
-            'video_filename' => 'required|file|mimes:mp4' 
+            'video_filename' => 'required|file|mimes:mp4',
+            'category' => 'required' 
         ]);        
 
         $video = $request->file('video_filename');
@@ -37,9 +35,6 @@ class VideoController extends Controller
          /* $link = public_path(
             'videos/'
         ) . uniqid(\Auth::user()->id . '_') . '.mp4';
-
-       
-
         $video->move($link);
         $video_filename =  url(explode('public' . DIRECTORY_SEPARATOR , $link)[1]) ;  */
 
@@ -52,14 +47,23 @@ class VideoController extends Controller
             'title' => $request['title'],
             'description' => $request['description'],
             'video_filename' => $video_filename,
+            'category_id' => $request['category']
         ]);
 
         session()->flash (
             'message', "You uploaded a new video, called " . $request['title'] . '.'
         );
+
+        $link = $request['category'];
         
         return redirect('/');
     }
+
+    public function categoryVideos(Category $category) {
+        $videos = $category->videos;
+        return view('videos.categoryVideos', compact('videos'));
+
+    }   
 
    
 }

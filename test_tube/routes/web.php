@@ -25,6 +25,8 @@ Route::get('/videos/{video}', 'VideoController@singleVideo');
 
 Route::post('/videos/{video}/comments', 'CommentController@store');
 
+Route::get('/category/{category}', 'VideoController@categoryVideos');
+
 
 Auth::routes();
 

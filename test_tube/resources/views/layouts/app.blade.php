@@ -73,8 +73,8 @@
         <main>
                 <div class="container">
 
-                         @include('layouts.head')
-
+                        @include('layouts.head')
+                        
                         @yield('content')
 
             </div>

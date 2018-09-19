@@ -2,6 +2,8 @@
 
 @section('content')
 
+@include('layouts.categories')
+
 <div class="panel-video">
     <video controls  width="100%" >
 		<source src="{{url($video->video_filename)}}" type="video/mp4">
@@ -14,7 +16,12 @@
     </div>
 
     <div>
-        Uploaded at : {{$video->created_at->toFormattedDateString()}}
+        Uploaded at : {{$video->created_at->toFormattedDateString()}} by 
+        {{$video->user->name}}
+    </div>
+
+    <div>
+        Category: <a href="/category/{{$video->category->id}}">{{$video->category->title}}</a>
     </div>
 
     <div class="panel-video__description">
@@ -27,42 +34,9 @@
 
     <span>Comments  ({{count($video->comments)}}) </span>
 
-    <div class="leave-comment">
-        <form action="/videos/{{$video->id}}/comments" method="POST" >
-            {{csrf_field()}}
-            <div class="form-group">
-                <div>{{$user['name']}}</div>
-                <input type="text" class="leave-comment-input" name="body" id="comment" placeholder="Leave a comment...">
-            </div>
+    @include('comments.makeComment')
 
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Leave a comment</button>
-            </div>
-        </form>
-    </div>
-    @if (count($video->comments))
-        @foreach ($video->comments as $comment)
-            <div class="single-comment">
-                <div class="single-comment__username">
-                    <span>
-                        {{$comment->user->name}}
-                            @if ($comment->user->id == 2)
-                                <i class="far fa-check-circle" style="margin-left: 5px;"></i>
-                            @endif
-                    </span>
-                   
-                    <span>{{$comment->created_at->diffForHumans()}}</span>
-                </div>
-                
-                <div class="single-comment__commentbody">
-                    {{$comment->body}}
-                </div>
-                
-            </div>
-        @endforeach
-    @else 
-        <h4 class="not_found">Nobody comment this video yet...</h4>
-    @endif
+    @include('comments.commentsToVideo')
 
 </div>
 

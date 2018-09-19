@@ -1,6 +1,10 @@
 .videos-block {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
+
+    .single-video {
+        margin: 15px ;
+    }
 }
 

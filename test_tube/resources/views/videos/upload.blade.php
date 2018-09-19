@@ -5,7 +5,7 @@
         <div class="col-md-8">
 
             <h1> Upload Video </h1>
-            <form method="POST" enctype="multipart/form-data" action="/upload">
+            <form method="POST" enctype="multipart/form-data" action="/upload" class="upload">
                 {{csrf_field()}}
 
                 <div class="form-group">
@@ -19,12 +19,21 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="category">Choose a category</label>
+                    <select name="category" id="category">
+                        @foreach ($categories as $category)
+                            <option value="{{$category->id}}">{{$category->title}}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label for="video_filename">Choose a file</label>
                     <input type="file" name="video_filename" id="video_filename">
                 </div>
 
                 <div class="form-group">
-                    <button type="submit"> Upload </button>
+                    <button type="submit" class="btn btn-primary"> Upload </button>
                 </div>
             </form>
         </div>

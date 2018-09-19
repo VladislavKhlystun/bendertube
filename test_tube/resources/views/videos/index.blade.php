@@ -2,6 +2,8 @@
 
 @section('content')
 
+@include('layouts.categories')
+
 	<div class="videos-block">
 	 @if (count($videos))
 			@foreach ($videos as $video)

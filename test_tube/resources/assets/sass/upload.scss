@@ -1,12 +1,15 @@
-.form-group {
-    margin: 15px 0;
-
-    label {
-        display: block;
-    }
-
-    input,
-    textarea {
-        width: 50%;
+.upload {
+    .form-group {
+        margin: 15px 0;
+    
+        label {
+            display: block;
+        }
+    
+        input,
+        textarea,
+        select {
+            width: 50%;
+        }
     }
 }
