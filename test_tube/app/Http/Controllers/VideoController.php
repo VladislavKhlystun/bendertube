@@ -6,7 +6,7 @@ use App\User;
 use App\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+use App\Services\VideoMagicInterface;
 
 
 class VideoController extends Controller
@@ -23,7 +23,7 @@ class VideoController extends Controller
         return view('videos.singleVideo', compact('video'));
     }
 
-    public function store(Request $request) {
+    public function store(Request $request, VideoMagicInterface $videoService) {
         $this->validate($request, [
             'title' => 'required|max:255',
             'video_filename' => 'required|file|mimes:mp4',
@@ -42,6 +42,14 @@ class VideoController extends Controller
         $video-> move(public_path() . '/videos' , $video_filename);
         $video_filename = 'videos/' . $video_filename;
         
+        /*резать на разрешения */
+
+        //$video_filename
+     
+        //--------------------------------
+        
+        $videoService->makeDiffResolutions($video_filename);
+        
         Video::create([
             'user_id' => \Auth::user()->id,
             'title' => $request['title'],
@@ -53,8 +61,6 @@ class VideoController extends Controller
         session()->flash (
             'message', "You uploaded a new video, called " . $request['title'] . '.'
         );
-
-        $link = $request['category'];
         
         return redirect('/');
     }
@@ -62,8 +68,15 @@ class VideoController extends Controller
     public function categoryVideos(Category $category) {
         $videos = $category->videos;
         return view('videos.categoryVideos', compact('videos'));
-
     }   
 
+    public function userVideos(User $user) {
+        $videos = $user->videos;
+        return view('videos.userVideos', compact('videos'));
+    }
    
+    public function edit(Video $video) {
+        return view('videos.edit');
+    }
+
 }

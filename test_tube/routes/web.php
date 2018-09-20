@@ -13,19 +13,24 @@
 
 Route::get('/', 'VideoController@index');
 
-/* Route::group(['middleware' => ['auth'] ], function () {
+Route::group(['middleware' => ['auth'] ], function () {
+    
+    Route::get('/upload', 'VideoController@showUploadPage');
 
-}); */
+    Route::post('/upload', 'VideoController@store');
 
-Route::get('/upload', 'VideoController@showUploadPage');
+    Route::get('/{user}/videos', 'VideoController@userVideos');
 
-Route::post('/upload', 'VideoController@store');
+    Route::get('/video/{video}/edit', 'VideoController@edit');
+
+}); 
 
 Route::get('/videos/{video}', 'VideoController@singleVideo');
 
 Route::post('/videos/{video}/comments', 'CommentController@store');
 
 Route::get('/category/{category}', 'VideoController@categoryVideos');
+
 
 
 Auth::routes();

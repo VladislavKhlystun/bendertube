@@ -17,7 +17,7 @@
 
     <div>
         Uploaded at : {{$video->created_at->toFormattedDateString()}} by 
-        {{$video->user->name}}
+        <a href="http://localhost/{{$video->user->id}}/videos">{{$video->user->name}}</a>
     </div>
 
     <div>
