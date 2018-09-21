@@ -24,6 +24,7 @@ class VideoController extends Controller
     }
 
     public function store(Request $request, VideoMagicInterface $videoService) {
+        
         $this->validate($request, [
             'title' => 'required|max:255',
             'video_filename' => 'required|file|mimes:mp4',
@@ -31,7 +32,7 @@ class VideoController extends Controller
         ]);        
 
         $video = $request->file('video_filename');
-
+       
          /* $link = public_path(
             'videos/'
         ) . uniqid(\Auth::user()->id . '_') . '.mp4';
@@ -39,14 +40,11 @@ class VideoController extends Controller
         $video_filename =  url(explode('public' . DIRECTORY_SEPARATOR , $link)[1]) ;  */
 
         $video_filename = uniqid() . '.mp4';
+
+        
+
         $video-> move(public_path() . '/videos' , $video_filename);
         $video_filename = 'videos/' . $video_filename;
-        
-        /*резать на разрешения */
-
-        //$video_filename
-     
-        //--------------------------------
         
         $videoService->makeDiffResolutions($video_filename);
         
